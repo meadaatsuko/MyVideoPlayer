@@ -1,1 +1,55 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>视频播放器</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<script type="text/javascript" src="javascript/index.js"></script>
+</head>
+<body>
+	<div class="video-player">
+		<div class="video-box">
+			<video src="video/X1 隐士.mp4" id="video-source" width="803px" height="328px"></video>
+			<p class="play-switch"></p>
+		</div>
+		<div class="video-control">
+			<div class="play-switch">
+				<i></i>
+			</div>
+			<div class="play-duration">
+				<span id="current-time">00:00</span><div class="play-line">
+					<div class="current-line">
+						<div class="move-line"></div>
+					</div>
+				</div><span id="duration-time">00:00</span>
+			</div>
+			<div class="volume">
+				<i></i>
+				<div class="volume-block">
+					<ul>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+				</div>
+				<em id="volume-slient"></em>
+			</div>
+			<div class="screen-full">
+				<i></i>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="javascript/video-player.js"></script>
+</body>
+</html>
