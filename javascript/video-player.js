@@ -26,16 +26,11 @@ function videoPlayerEvent(event) {
 				var videoBox = document.querySelector("video#video-source");
 				currentTimeEvent(videoBox);
 			},1000);
-			lineWidthStop = setInterval(function (argument) {
-				// body...
-				currentLineEvent();
-			},stepTime);
 		}else{
 			videoBox.pause();
 			playIcon.style.display = "block";
 			playSwitchIcon.style.background = "url(images/play-small.png)";
 			clearInterval(currentTimeStop);
-			clearInterval(lineWidthStop);
 		}
 	};
 
@@ -115,21 +110,37 @@ function videoPlayerEvent(event) {
 
 
 	//进度条事件
-	var currentLineEvent = function (argument) {
+	var videoLineStop;
+	function videoLineEvent(argument) {
 		// body...
-		if (length < lineWidth) {
-			length++;
-		}else{
-			length = 0;
-			clearInterval(lineWidthStop);
+		var oldTime = videoBox.currentTime;
+		function currentTimeLine(argument) {
+			// body...
+			var newTime = videoBox.currentTime;
+			if (newTime - oldTime != 0) {
+				length++;
+				line.style.width = length + "px";
+			}
 		}
-		line.style.width = length + "px";
+		setTimeout(function (argument) {
+			// body...
+			currentTimeLine();
+		},stepTime);
 	}
-	addEvent(lineClickItem,"click",function (event) {
+	addEvent(videoBox,"play",function (event) {
 		// body...
-		length = event.clientX - elementLeft(this);
-		videoBox.currentTime = (length * stepTime / 1000).toFixed(0);
-		line.style.width = length + "px";
+		videoLineStop = setInterval(function (argument) {
+			// body...
+			videoLineEvent();
+		},stepTime);
+	});
+	addEvent(videoBox,"pause",function (event) {
+		// body...
+		clearInterval(videoLineStop);
+	});
+	addEvent(videoBox,"ended",function (event) {
+		// body...
+		clearInterval(videoLineStop);
 	});
 
 	// 调节音量事件
