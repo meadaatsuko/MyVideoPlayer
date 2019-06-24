@@ -141,7 +141,17 @@ function videoPlayerEvent(event) {
 	addEvent(videoBox,"ended",function (event) {
 		// body...
 		clearInterval(videoLineStop);
+		length = 0;
+		line.style.width = length + "px";
 	});
+	addEvent(lineClickItem,"click",function (event) {
+		// body...
+		var leftPos = event.clientX - elementLeft(this);
+		length = leftPos;
+		line.style.width = length + "px";
+		videoBox.currentTime = length * stepTime / 1000;
+	});
+
 
 	// 调节音量事件
 	function volumeSelect(argument) {
